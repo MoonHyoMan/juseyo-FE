@@ -4,6 +4,9 @@ import axiosInstance from '@/api/instance';
 
 import NavBar from '@/components/NavBar';
 import { Button } from '@/components/ui/button';
+import Header from '@/components/Header';
+import HomeDashBoard from '@/components/HomeDashboard';
+
 interface Example {
   userId: string;
   id: string;
@@ -31,12 +34,13 @@ export default function MainPage() {
   return (
     <>
       <NavBar />
-      <div>MainPage</div>
-      <div>{exampleData?.title}</div>
-      <Button>버튼</Button>
-      <Button variant={'destructive'}>버튼</Button>
-      <Button size={'lg'}>버튼</Button>
-      <Button size={'full'}>버튼</Button>
+      <HomeDashBoard
+        name="문효만"
+        level={1}
+        money={20500}
+        point={230}
+        successfulMisson={2}
+      />
     </>
   );
 }
