@@ -29,7 +29,7 @@ const HomeDashBoard = ({
         </SavedCard>
         <LevelCard>
           <LevelContainer>
-            <Title>현재 레벨 1</Title>
+            <Title>현재 레벨 {level}</Title>
             <Point>다음 레벨까지 {point}P</Point>
           </LevelContainer>
           <Progress value={33} />

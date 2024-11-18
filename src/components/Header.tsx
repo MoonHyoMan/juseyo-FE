@@ -22,6 +22,9 @@ const HeaderContainer = styled.div`
   padding: 16px 20px;
   display: flex;
   justify-content: space-between;
+  background-color: var(--white);
+  position: fixed;
+  z-index: 1000;
 
   h1 {
     font-size: 22px;
