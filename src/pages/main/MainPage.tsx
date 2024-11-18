@@ -62,8 +62,18 @@ export default function MainPage() {
       <Section>
         <SectionHeader title="최근 완료한 미션" path="/mission" />
         <CardContainer>
-          <MissionCard title="~~사오기" category="기타" amount={1500} />
-          <MissionCard title="국어 공부하기" category="학습" amount={2500} />
+          <MissionCard
+            title="~~사오기"
+            category="기타"
+            amount={1500}
+            daedline="2024-11-15 18:00:00"
+          />
+          <MissionCard
+            title="국어 공부하기"
+            category="학습"
+            amount={2500}
+            daedline="2024-11-13 22:00:00"
+          />
         </CardContainer>
       </Section>
       <Section>

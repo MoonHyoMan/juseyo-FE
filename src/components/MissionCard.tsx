@@ -4,7 +4,7 @@ interface MissionCardProps {
   title: string;
   category: string;
   amount: number;
-  daedline?: string;
+  daedline: string;
 }
 
 const MissionCard = ({
@@ -25,6 +25,8 @@ const MissionCard = ({
     if (hoursRemaining <= 24 && hoursRemaining > 0)
       return `${hoursRemaining}시간 남음`;
     if (daysRemaining >= 1) return `D-${daysRemaining}`;
+    if (hoursRemaining <= 0)
+      return `${deadlineDate.getMonth() + 1}월 ${deadlineDate.getDate()}일`;
   };
 
   const { color, src } = getCategoryInfo(category);
@@ -43,7 +45,7 @@ const MissionCard = ({
       </TopContainer>
       <BottomContainer>
         <img src="/icons/point.svg" alt="포인트" />
-        <p>{amount}</p>
+        <p>{amount.toLocaleString()}</p>
       </BottomContainer>
     </Container>
   );
@@ -59,6 +61,8 @@ const getCategoryInfo = (category: string) => {
       return { color: 'var(--blue)', src: '/images/study.png' };
     case '집안일':
       return { color: 'var(--green)', src: '/images/housework.png' };
+    case '심부름':
+      return { color: 'var(--gray)', src: '/images/errand.png' };
     case '기타':
       return { color: 'var(--orange)', src: '/images/etc.png' };
   }

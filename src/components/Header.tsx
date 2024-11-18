@@ -19,6 +19,7 @@ export default Header;
 
 const HeaderContainer = styled.div`
   width: 100%;
+  max-width: 600px;
   padding: 16px 20px;
   display: flex;
   justify-content: space-between;
