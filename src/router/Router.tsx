@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import MainPage from '@/pages/main/MainPage';
 import MissionMain from '@/pages/mission/MissionMain';
@@ -8,9 +9,28 @@ import MyPage from '@/pages/mypage/MyPage';
 import EduQuiz from '@/pages/edu/EduQuiz';
 import QuizResult from '@/pages/edu/QuizResult';
 
+function ThemeColorManager() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+
+    if (metaThemeColor) {
+      if (location.pathname === '/') {
+        metaThemeColor.setAttribute('content', '#FEDE5B');
+      } else {
+        metaThemeColor.setAttribute('content', '#FDFDFD');
+      }
+    }
+  }, [location]);
+
+  return null;
+}
+
 export default function Router() {
   return (
     <BrowserRouter>
+      <ThemeColorManager />
       <Routes>
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/mission" element={<MissionMain />}></Route>

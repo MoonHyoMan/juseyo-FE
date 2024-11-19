@@ -24,6 +24,41 @@ export default function EduNews() {
       description: '2024년 11월 18일',
       url: 'https://www.naver.com',
     },
+    {
+      index: 3,
+      imgUrl: '/images/card-news.jpg',
+      title: '카드뉴스 제목3',
+      description: '2024년 11월 18일',
+      url: 'https://www.naver.com',
+    },
+    {
+      index: 3,
+      imgUrl: '/images/card-news.jpg',
+      title: '카드뉴스 제목3',
+      description: '2024년 11월 18일',
+      url: 'https://www.naver.com',
+    },
+    {
+      index: 3,
+      imgUrl: '/images/card-news.jpg',
+      title: '카드뉴스 제목3',
+      description: '2024년 11월 18일',
+      url: 'https://www.naver.com',
+    },
+    {
+      index: 3,
+      imgUrl: '/images/card-news.jpg',
+      title: '카드뉴스 제목3',
+      description: '2024년 11월 18일',
+      url: 'https://www.naver.com',
+    },
+    {
+      index: 3,
+      imgUrl: '/images/card-news.jpg',
+      title: '카드뉴스 제목3',
+      description: '2024년 11월 18일',
+      url: 'https://www.naver.com',
+    },
   ];
 
   const toArticle = (url: string) => {
@@ -50,10 +85,12 @@ export default function EduNews() {
 }
 
 const CardFrame = styled.div`
-  padding: 16px 16px 0px 16px;
+  height: calc(100% - 40px);
+  padding: 16px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
+  overflow-y: scroll;
 `;
 
 const Card = styled.div`

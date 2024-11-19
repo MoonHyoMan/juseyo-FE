@@ -23,7 +23,7 @@ export default function MainFrame({
 
 const StyledMainFrame = styled.div<MainFrameProps>`
   background-color: var(--white);
-  position: absolute;
+  position: relative;
   width: 100%;
   height: ${(props) => {
     if (props.$headbar && props.$navbar) {
