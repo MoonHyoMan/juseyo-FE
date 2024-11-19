@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Progress } from './ui/progress';
+import { useEffect, useState } from 'react';
 
 interface HomeDashBoardProps {
   name: string;
@@ -16,6 +17,13 @@ const HomeDashBoard = ({
   point,
   successfulMisson,
 }: HomeDashBoardProps) => {
+  const [progress, setProgress] = useState<number>(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setProgress(33);
+    }, 240);
+  }, []);
   return (
     <HomeDashboard>
       <Name>{name}님,</Name>
@@ -32,7 +40,7 @@ const HomeDashBoard = ({
             <Title>현재 레벨 {level}</Title>
             <Point>다음 레벨까지 {point}P</Point>
           </LevelContainer>
-          <Progress value={33} />
+          <Progress value={progress} />
         </LevelCard>
       </ContentContainer>
     </HomeDashboard>
@@ -46,6 +54,7 @@ const HomeDashboard = styled.div`
   width: 100%;
   padding: 20px;
   background: var(--primary);
+  max-width: 600px;
   z-index: 3;
 `;
 

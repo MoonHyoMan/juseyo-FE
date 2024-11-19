@@ -7,11 +7,16 @@ interface MissionCardProps {
   daedline: string;
 }
 
+interface CategoryInfo {
+  color: string;
+  src: string;
+}
+
 const MissionCard = ({
   title,
   category,
   amount,
-  daedline
+  daedline,
 }: MissionCardProps) => {
   const getTimeRemaining = (deadline: string) => {
     const now = new Date();
@@ -53,7 +58,7 @@ const MissionCard = ({
 
 export default MissionCard;
 
-const getCategoryInfo = (category: string) => {
+const getCategoryInfo = (category: string): CategoryInfo => {
   switch (category) {
     case '일상':
       return { color: 'var(--primary)', src: '/images/daily.png' };
@@ -66,6 +71,7 @@ const getCategoryInfo = (category: string) => {
     case '기타':
       return { color: 'var(--orange)', src: '/images/etc.png' };
   }
+  return { color: 'var(--primary)', src: '/images/daily.png' };
 };
 
 const Container = styled.div<{ color: string }>`
