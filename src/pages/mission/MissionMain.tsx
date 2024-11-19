@@ -4,23 +4,23 @@ import Header from '@/components/Header';
 import MissionCard from '@/components/MissionCard';
 import NavBar from '@/components/NavBar';
 import TabBar from '@/components/TabBar';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@radix-ui/react-select';
+// import {
+//   Select,
+//   SelectContent,
+//   SelectItem,
+//   SelectTrigger,
+//   SelectValue
+// } from '@radix-ui/react-select';
 import { useState } from 'react';
 import styled from 'styled-components';
 
 export default function MissionMain() {
   const category = ['전체', '일상', '집안일', '심부름', '학습', '기타'];
-  const currentMonth = getCurrentMonth();
-  const previousMonths = getPreviousMonths();
+  // const currentMonth = getCurrentMonth();
+  // const previousMonths = getPreviousMonths();
 
   const [activeTab, setActiveTab] = useState<number>(0);
-  const [selectedMonth, setSelectedMonth] = useState(currentMonth);
+  // const [selectedMonth, setSelectedMonth] = useState(currentMonth);
   const [selectedCategory, setSelectedCategory] = useState<string>('전체');
 
   const filteredMissions = missionData.filter((mission) =>
@@ -92,23 +92,23 @@ export default function MissionMain() {
   );
 }
 
-const getCurrentMonth = () => {
-  const now = new Date();
-  return String(now.getMonth() + 1).padStart(2, '0');
-};
+// const getCurrentMonth = () => {
+//   const now = new Date();
+//   return String(now.getMonth() + 1).padStart(2, '0');
+// };
 
-const getPreviousMonths = () => {
-  const now = new Date();
-  const currentMonth = now.getMonth() + 1;
+// const getPreviousMonths = () => {
+//   const now = new Date();
+//   const currentMonth = now.getMonth() + 1;
 
-  const months = [];
+//   const months = [];
 
-  for (let i = 1; i < currentMonth; i++) {
-    months.push(String(i).padStart(2, '0'));
-  }
+//   for (let i = 1; i < currentMonth; i++) {
+//     months.push(String(i).padStart(2, '0'));
+//   }
 
-  return months;
-};
+//   return months;
+// };
 
 const missionData = [
   {
