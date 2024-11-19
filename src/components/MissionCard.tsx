@@ -4,7 +4,7 @@ interface MissionCardProps {
   title: string;
   category: string;
   amount: number;
-  daedline: string;
+  deadline: string;
 }
 
 interface CategoryInfo {
@@ -16,7 +16,7 @@ const MissionCard = ({
   title,
   category,
   amount,
-  daedline,
+  deadline
 }: MissionCardProps) => {
   const getTimeRemaining = (deadline: string) => {
     const now = new Date();
@@ -45,7 +45,7 @@ const MissionCard = ({
         </CategoryBadge>
         <TextContainer>
           <h1>{title}</h1>
-          <p>{getTimeRemaining(daedline)}</p>
+          <p>{getTimeRemaining(deadline)}</p>
         </TextContainer>
       </TopContainer>
       <BottomContainer>
