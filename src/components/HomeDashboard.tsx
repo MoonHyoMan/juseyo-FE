@@ -14,7 +14,7 @@ const HomeDashBoard = ({
   level,
   money,
   point,
-  successfulMisson
+  successfulMisson,
 }: HomeDashBoardProps) => {
   return (
     <HomeDashboard>
@@ -42,9 +42,11 @@ const HomeDashBoard = ({
 export default HomeDashBoard;
 
 const HomeDashboard = styled.div`
+  position: fixed;
   width: 100%;
   padding: 20px;
   background: var(--primary);
+  z-index: 3;
 `;
 
 const ContentContainer = styled.div`
