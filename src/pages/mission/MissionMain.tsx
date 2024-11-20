@@ -15,7 +15,15 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 export default function MissionMain() {
-  const category = ['전체', '일상', '집안일', '심부름', '학습', '기타'];
+  const category = [
+    '전체',
+    '일상',
+    '집안일',
+    '학습',
+    '자기관리',
+    '심부름',
+    '기타'
+  ];
   const currentMonth = getCurrentMonth();
   const previousMonths = getPreviousMonths();
 
@@ -187,7 +195,7 @@ const missionData = [
   },
   {
     title: '~~사오기',
-    category: '심부름',
+    category: '자기관리',
     deadline: '2024-11-21 02:00:00',
     amount: 1200
   },
@@ -228,6 +236,9 @@ const CategorySection = styled.div<{ $activeTab: number }>`
   width: 100%;
   max-width: 600px;
   padding: ${({ $activeTab }) => ($activeTab === 1 ? '8px 20px' : '16px 20px')};
+  overflow-x: auto;
+  white-space: nowrap;
+  gap: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
