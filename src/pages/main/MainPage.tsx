@@ -35,7 +35,7 @@ export default function MainPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await login("dks729927@gmail.com", "admin");
+        const res = await login("admin_child", "admin");
         // console.log(res.data); // 응답 데이터 처리
         localStorage.setItem("accessToken", res.data.accessToken);
       } catch (error) {

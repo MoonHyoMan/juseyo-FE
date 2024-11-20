@@ -1,4 +1,5 @@
 // import React from 'react';
+import { getRequestMission } from "@/api/mission";
 import CategoryButton from "@/components/CategoryButton";
 import Header from "@/components/Header";
 import MissionCard from "@/components/MissionCard";
@@ -54,6 +55,18 @@ export default function MissionChild() {
     if (tabParam === "completed") {
       setActiveTab(1);
     }
+
+    const fetchRequestMission = async () => {
+      try {
+        const res = await getRequestMission();
+        // console.log(res.data)
+        setRequestMission(res.data);
+      } catch (error) {
+        throw new Error(`fetchRequestMission Error: ${error}`);
+      }
+    };
+
+    fetchRequestMission();
   }, [location.search]);
 
   // const getOngoingMissions = () => {
