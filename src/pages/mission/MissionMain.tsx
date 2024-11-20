@@ -240,7 +240,8 @@ const CategorySection = styled.div<{ $activeTab: number }>`
   white-space: nowrap;
   gap: 8px;
   display: flex;
-  justify-content: space-between;
+  justify-content: ${({ $activeTab }) =>
+    $activeTab === 0 ? '' : 'space-between'};
   align-items: center;
   background-color: var(--white);
   position: fixed;
