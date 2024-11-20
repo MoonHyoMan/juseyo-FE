@@ -16,7 +16,7 @@ export default function MainPage() {
     title: '신나는 신용생활 [EP.1]',
     description:
       '신용의 원리와 중요성에 대해 이해하고 어떻게 하면 신용을 쌓을 수 있을지 알아보도록 해요.🔎',
-    videoUrl: 'https://www.youtube.com/watch?v=md1-qbKR_eI',
+    videoUrl: 'https://www.youtube.com/watch?v=md1-qbKR_eI'
   };
   return (
     <>
@@ -32,36 +32,39 @@ export default function MainPage() {
         <div onClick={() => navigate('/signup')}>회원가입</div>
         <div onClick={() => navigate('/login')}>로그인</div>
         <Section>
-          <SectionHeader title="진행 중인 미션" path="/mission" />
+          <SectionHeader title="진행 중인 미션" path="/mission/child" />
           <CardContainer>
             <MissionCard
               title="~~사오기"
               category="일상"
-              daedline="2024-11-19 23:00:00"
+              deadline="2024-11-19 23:00:00"
               amount={1200}
             />
             <MissionCard
               title="설거지하기"
               category="집안일"
-              daedline="2024-11-22 20:00:00"
+              deadline="2024-11-22 20:00:00"
               amount={2000}
             />
           </CardContainer>
         </Section>
         <Section>
-          <SectionHeader title="최근 완료한 미션" path="/mission" />
+          <SectionHeader
+            title="최근 완료한 미션"
+            path="/mission/child?tab=completed"
+          />
           <CardContainer>
             <MissionCard
               title="~~사오기"
               category="기타"
               amount={1500}
-              daedline="2024-11-15 18:00:00"
+              deadline="2024-11-15 18:00:00"
             />
             <MissionCard
               title="국어 공부하기"
               category="학습"
               amount={2500}
-              daedline="2024-11-13 22:00:00"
+              deadline="2024-11-13 22:00:00"
             />
           </CardContainer>
         </Section>

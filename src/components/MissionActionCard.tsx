@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
-interface MissionCardProps {
+interface MissionActionCardProps {
   title: string;
   category: string;
   amount: number;
   deadline: string;
+  buttons: Array<string>;
 }
 
 interface CategoryInfo {
@@ -12,12 +13,13 @@ interface CategoryInfo {
   src: string;
 }
 
-const MissionCard = ({
+const MissionActionCard = ({
   title,
   category,
   amount,
-  deadline
-}: MissionCardProps) => {
+  deadline,
+  buttons
+}: MissionActionCardProps) => {
   const getTimeRemaining = (deadline: string) => {
     const now = new Date();
     const deadlineDate = new Date(deadline);
@@ -37,26 +39,32 @@ const MissionCard = ({
   const { color, src } = getCategoryInfo(category);
 
   return (
-    <Container color={color}>
-      <TopContainer>
-        <CategoryBadge>
-          <img src={src} alt={category} />
-          <span>{category}</span>
-        </CategoryBadge>
-        <TextContainer>
-          <h1>{title}</h1>
-          <p>{getTimeRemaining(deadline)}</p>
-        </TextContainer>
-      </TopContainer>
-      <BottomContainer>
-        <img src="/icons/point.svg" alt="포인트" />
-        <p>{amount.toLocaleString()}</p>
-      </BottomContainer>
+    <Container>
+      <MissionContainer color={color}>
+        <TopContainer>
+          <CategoryBadge>
+            <img src={src} alt={category} />
+            <span>{category}</span>
+          </CategoryBadge>
+          <TextContainer>
+            <h1>{title}</h1>
+            <p>{getTimeRemaining(deadline)}</p>
+          </TextContainer>
+        </TopContainer>
+        <BottomContainer>
+          <img src="/icons/point.svg" alt="포인트" />
+          <p>{amount.toLocaleString()}</p>
+        </BottomContainer>
+      </MissionContainer>
+      <ButtonFrame>
+        <Button className="text-[var(--red)]">{buttons[0]}</Button>
+        <Button className="text-[var(--black)]">{buttons[1]}</Button>
+      </ButtonFrame>
     </Container>
   );
 };
 
-export default MissionCard;
+export default MissionActionCard;
 
 const getCategoryInfo = (category: string): CategoryInfo => {
   switch (category) {
@@ -76,13 +84,19 @@ const getCategoryInfo = (category: string): CategoryInfo => {
   return { color: 'var(--primary)', src: '/icons/daily.svg' };
 };
 
-const Container = styled.div<{ color: string }>`
+const Container = styled.div`
+  width: calc(50% - 8px);
+  display: flex;
+  flex-direction: column;
+`;
+
+const MissionContainer = styled.div<{ color: string }>`
   display: flex;
   flex-direction: column;
   gap: 22px;
-  width: calc(50% - 8px);
-  border-radius: 12px;
-  padding: 16px;
+  width: 100%;
+  border-radius: 12px 12px 0 0;
+  padding: 16px 16px 8px 16px;
   background-color: ${(props) => props.color};
 `;
 
@@ -134,4 +148,25 @@ const TextContainer = styled.div`
     font-weight: 400;
     color: var(--dark-gray);
   }
+`;
+
+const ButtonFrame = styled.div`
+  width: 100%;
+  display: flex;
+  background-color: var(--background);
+  border-radius: 0 0 12px 12px;
+
+  :first-child {
+    border-right: 1px solid var(--border);
+  }
+`;
+
+const Button = styled.div`
+  flex: 1;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14;
+  font-weight: 400;
 `;
