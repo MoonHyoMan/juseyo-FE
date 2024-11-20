@@ -1,5 +1,6 @@
 // import React from 'react';
 import CategoryButton from '@/components/CategoryButton';
+import CompletedMissionCard from '@/components/CompletedMissionCard';
 import Header from '@/components/Header';
 import MissionCard from '@/components/MissionCard';
 import NavBar from '@/components/NavBar';
@@ -113,7 +114,11 @@ export default function MissionChild() {
                 return missionMonth === selectedMonth;
               })
               .map((mission, index) => (
-                <MissionCard key={index} {...mission} />
+                <CompletedMissionCard
+                  key={index}
+                  {...mission}
+                  isCompleted={true}
+                />
               ))}
           </MissionSection>
         </>
@@ -166,30 +171,30 @@ const missionData = [
   {
     title: '~~사오기',
     category: '일상',
-    deadline: '2024-11-21 02:00:00',
+    deadline: '2024-11-22 02:00:00',
     amount: 1200
   },
   {
     title: '설거지하기',
     category: '집안일',
-    deadline: '2024-11-21 02:00:00',
+    deadline: '2024-11-22 02:00:00',
     amount: 1200
   },
   {
     title: '~~사오기',
     category: '심부름',
-    deadline: '2024-11-21 02:00:00',
+    deadline: '2024-11-22 02:00:00',
     amount: 1200
   },
   {
     title: '국어 공부하기',
     category: '학습',
-    deadline: '2024-11-21 02:00:00',
+    deadline: '2024-11-22 02:00:00',
     amount: 1200
   },
   {
     title: '~~사오기',
-    category: '기타',
+    category: '일상',
     deadline: '2024-11-21 02:00:00',
     amount: 1200
   },
@@ -207,19 +212,19 @@ const missionData = [
   },
   {
     title: '~~사오기',
-    category: '심부름',
+    category: '자기관리',
+    deadline: '2024-11-21 02:00:00',
+    amount: 1200
+  },
+  {
+    title: '아아아',
+    category: '기타',
     deadline: '2024-11-21 02:00:00',
     amount: 1200
   },
   {
     title: '~~사오기',
-    category: '심부름',
-    deadline: '2024-11-21 02:00:00',
-    amount: 1200
-  },
-  {
-    title: '~~사오기',
-    category: '심부름',
+    category: '학습',
     deadline: '2024-11-19 02:00:00',
     amount: 1200
   },

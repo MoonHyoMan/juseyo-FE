@@ -167,6 +167,6 @@ const Button = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 14;
+  font-size: 14px;
   font-weight: 400;
 `;
