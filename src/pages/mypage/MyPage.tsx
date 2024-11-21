@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import toast from 'react-hot-toast';
 
 import { useRecoilState } from 'recoil';
 import { getUserInfo } from '@/api/userInfo';
@@ -108,6 +109,7 @@ export default function MyPage() {
         const res = await axiosInstance.get(
           `/mypage/point/charge/${withdrawAmount}`
         );
+        toast.success('주세요 지갑에 충전했어요');
         console.log(res.data);
       } catch (error) {
         console.log(error);
@@ -117,6 +119,7 @@ export default function MyPage() {
         const res = await axiosInstance.get(
           `/mypage/point/withdraw/${withdrawAmount}`
         );
+        toast.success('용돈을 계좌로 옮겼어요');
         console.log(res.data);
       } catch (error) {
         console.log(error);
