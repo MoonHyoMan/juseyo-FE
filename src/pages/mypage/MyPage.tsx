@@ -22,7 +22,7 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogFooter,
-  DialogClose,
+  DialogClose
 } from '@/components/ui/dialog';
 import axiosInstance from '@/api/instance';
 
