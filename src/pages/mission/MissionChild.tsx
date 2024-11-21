@@ -1,6 +1,6 @@
 // import React from 'react';
+import { getRequestMission } from '@/api/mission';
 import CategoryButton from '@/components/CategoryButton';
-import CompletedMissionCard from '@/components/CompletedMissionCard';
 import Header from '@/components/Header';
 import MissionCard from '@/components/MissionCard';
 import NavBar from '@/components/NavBar';
@@ -12,8 +12,14 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
+import {
+  completeMissionState,
+  progressMissionState,
+  requestMissionState
+} from '@/store/mission';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 export default function MissionChild() {
@@ -35,6 +41,13 @@ export default function MissionChild() {
   const [selectedMonth, setSelectedMonth] = useState(currentMonth);
   const [selectedCategory, setSelectedCategory] = useState<string>('전체');
 
+  const [progressMission, setProgreesMission] =
+    useRecoilState(progressMissionState);
+  const [completeMission, setCompleteMission] =
+    useRecoilState(completeMissionState);
+  const [requestMission, setRequestMission] =
+    useRecoilState(requestMissionState);
+
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const tabParam = searchParams.get('tab');
@@ -42,17 +55,29 @@ export default function MissionChild() {
     if (tabParam === 'completed') {
       setActiveTab(1);
     }
+
+    const fetchRequestMission = async () => {
+      try {
+        const res = await getRequestMission();
+        // console.log(res.data)
+        setRequestMission(res.data);
+      } catch (error) {
+        throw new Error(`fetchRequestMission Error: ${error}`);
+      }
+    };
+
+    fetchRequestMission();
   }, [location.search]);
 
-  const getOngoingMissions = () => {
-    const now = new Date();
-    return missionData.filter((mission) => new Date(mission.deadline) > now);
-  };
+  // const getOngoingMissions = () => {
+  //   const now = new Date();
+  //   return progressMission.filter((mission) => new Date(mission.endDate) > now);
+  // };
 
-  const getCompletedMissions = () => {
-    const now = new Date();
-    return missionData.filter((mission) => new Date(mission.deadline) < now);
-  };
+  // const getCompletedMissions = () => {
+  //   const now = new Date();
+  //   return completeMission.filter((mission) => new Date(mission.endDate) < now);
+  // };
 
   return (
     <>
@@ -73,14 +98,20 @@ export default function MissionChild() {
             ))}
           </CategorySection>
           <MissionSection>
-            {getOngoingMissions()
+            {progressMission
               .filter((mission) =>
                 selectedCategory === '전체'
                   ? true
                   : mission.category === selectedCategory
               )
               .map((mission, index) => (
-                <MissionCard key={index} {...mission} />
+                <MissionCard
+                  key={index}
+                  title={mission.content}
+                  category={mission.category}
+                  deadline={mission.endDate}
+                  amount={mission.point}
+                />
               ))}
           </MissionSection>
         </>
@@ -108,16 +139,18 @@ export default function MissionChild() {
             </Select>
           </CategorySection>
           <MissionSection>
-            {getCompletedMissions()
+            {completeMission
               .filter((mission) => {
-                const missionMonth = mission.deadline.slice(5, 7);
+                const missionMonth = mission.doneDate.slice(5, 7);
                 return missionMonth === selectedMonth;
               })
               .map((mission, index) => (
-                <CompletedMissionCard
+                <MissionCard
                   key={index}
-                  {...mission}
-                  isCompleted={true}
+                  title={mission.content}
+                  category={mission.category}
+                  deadline={mission.endDate}
+                  amount={mission.point}
                 />
               ))}
           </MissionSection>
@@ -130,18 +163,17 @@ export default function MissionChild() {
             <Text>수락 대기중인 미션</Text>
           </CategorySection>
           <MissionSection>
-            <MissionCard
-              title="~~사오기"
-              category="일상"
-              deadline="2024-11-18 10:00:00"
-              amount={1200}
-            ></MissionCard>
-            <MissionCard
-              title="설거지하기"
-              category="집안일"
-              deadline="2024-11-16 10:00:00"
-              amount={1200}
-            ></MissionCard>
+            {requestMission.map((mission, index) => {
+              return (
+                <MissionCard
+                  key={index}
+                  title={mission.content}
+                  category={mission.category}
+                  deadline={mission.endDate}
+                  amount={mission.point}
+                />
+              );
+            })}
           </MissionSection>
         </>
       )}
@@ -167,74 +199,74 @@ const getPreviousMonths = () => {
   return months;
 };
 
-const missionData = [
-  {
-    title: '~~사오기',
-    category: '일상',
-    deadline: '2024-11-22 02:00:00',
-    amount: 1200
-  },
-  {
-    title: '설거지하기',
-    category: '집안일',
-    deadline: '2024-11-22 02:00:00',
-    amount: 1200
-  },
-  {
-    title: '~~사오기',
-    category: '심부름',
-    deadline: '2024-11-22 02:00:00',
-    amount: 1200
-  },
-  {
-    title: '국어 공부하기',
-    category: '학습',
-    deadline: '2024-11-22 02:00:00',
-    amount: 1200
-  },
-  {
-    title: '~~사오기',
-    category: '일상',
-    deadline: '2024-11-21 02:00:00',
-    amount: 1200
-  },
-  {
-    title: '~~사오기',
-    category: '자기관리',
-    deadline: '2024-11-21 02:00:00',
-    amount: 1200
-  },
-  {
-    title: '~~사오기',
-    category: '심부름',
-    deadline: '2024-11-21 02:00:00',
-    amount: 1200
-  },
-  {
-    title: '~~사오기',
-    category: '자기관리',
-    deadline: '2024-11-21 02:00:00',
-    amount: 1200
-  },
-  {
-    title: '아아아',
-    category: '기타',
-    deadline: '2024-11-21 02:00:00',
-    amount: 1200
-  },
-  {
-    title: '~~사오기',
-    category: '학습',
-    deadline: '2024-11-19 02:00:00',
-    amount: 1200
-  },
-  {
-    title: '~~사오기',
-    category: '심부름',
-    deadline: '2024-11-18 02:00:00',
-    amount: 1200
-  }
-];
+// const missionData = [
+//   {
+//     title: '~~사오기',
+//     category: '일상',
+//     deadline: '2024-11-21 02:00:00',
+//     amount: 1200
+//   },
+//   {
+//     title: '설거지하기',
+//     category: '집안일',
+//     deadline: '2024-11-21 02:00:00',
+//     amount: 1200
+//   },
+//   {
+//     title: '~~사오기',
+//     category: '심부름',
+//     deadline: '2024-11-21 02:00:00',
+//     amount: 1200
+//   },
+//   {
+//     title: '국어 공부하기',
+//     category: '학습',
+//     deadline: '2024-11-21 02:00:00',
+//     amount: 1200
+//   },
+//   {
+//     title: '~~사오기',
+//     category: '기타',
+//     deadline: '2024-11-21 02:00:00',
+//     amount: 1200
+//   },
+//   {
+//     title: '~~사오기',
+//     category: '자기관리',
+//     deadline: '2024-11-21 02:00:00',
+//     amount: 1200
+//   },
+//   {
+//     title: '~~사오기',
+//     category: '심부름',
+//     deadline: '2024-11-21 02:00:00',
+//     amount: 1200
+//   },
+//   {
+//     title: '~~사오기',
+//     category: '심부름',
+//     deadline: '2024-11-21 02:00:00',
+//     amount: 1200
+//   },
+//   {
+//     title: '~~사오기',
+//     category: '심부름',
+//     deadline: '2024-11-21 02:00:00',
+//     amount: 1200
+//   },
+//   {
+//     title: '~~사오기',
+//     category: '심부름',
+//     deadline: '2024-11-19 02:00:00',
+//     amount: 1200
+//   },
+//   {
+//     title: '~~사오기',
+//     category: '심부름',
+//     deadline: '2024-11-18 02:00:00',
+//     amount: 1200
+//   }
+// ];
 
 const CategorySection = styled.div<{ $activeTab: number }>`
   margin-top: 103px;
