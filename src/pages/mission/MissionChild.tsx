@@ -44,8 +44,21 @@ export default function MissionChild() {
     '심부름',
     '기타'
   ];
+  const months = [
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12'
+  ];
   const currentMonth = getCurrentMonth();
-  const previousMonths = getPreviousMonths();
 
   const location = useLocation();
   const [activeTab, setActiveTab] = useState<number>(0);
@@ -204,12 +217,11 @@ export default function MissionChild() {
                 <SelectValue></SelectValue>
               </SelectTrigger>
               <SelectContent>
-                {previousMonths.map((month) => (
+                {months.map((month) => (
                   <SelectItem key={month} value={month}>
                     {month}월
                   </SelectItem>
                 ))}
-                <SelectItem value={currentMonth}>{currentMonth}월</SelectItem>
               </SelectContent>
             </Select>
           </CategorySection>
@@ -232,19 +244,6 @@ export default function MissionChild() {
 const getCurrentMonth = () => {
   const now = new Date();
   return String(now.getMonth() + 1).padStart(2, '0');
-};
-
-const getPreviousMonths = () => {
-  const now = new Date();
-  const currentMonth = now.getMonth() + 1;
-
-  const months = [];
-
-  for (let i = 1; i < currentMonth; i++) {
-    months.push(String(i).padStart(2, '0'));
-  }
-
-  return months;
 };
 
 const CategorySection = styled.div<{ $activeTab: number }>`
